@@ -37,8 +37,6 @@ It's inspired by the game [Does Not Commute - mediocre](https://www.mediocre.se/
 
 Or you can just drive around if you like to.
 
-![City overview banner](Images/Vehicles.png)
-
 ## Download
 
 You can download the latest build in the [releases](https://github.com/ScrappyCocco/UETrafficGame/releases) section.
@@ -50,6 +48,8 @@ I provide both a Development and a Shipping version, the Development is useful i
 All assets used are free to use under the Creative Commons CC0 license.
 
 You can find a summary of the used in the [ASSETS](ASSETS.md) file.
+
+![City overview banner](Images/Vehicles.png)
 
 ## Engine Version
 
