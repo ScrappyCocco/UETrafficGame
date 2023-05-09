@@ -1,4 +1,4 @@
-![Game banner](Images/Banner.png)
+![City overview banner](Images/Banner.png)
 
 # UE5 - Traffic Game
 
@@ -36,6 +36,8 @@ In this small game you create your own traffic: every round you have to drive fr
 It's inspired by the game [Does Not Commute - mediocre](https://www.mediocre.se/commute/), I find it a very nice idea.
 
 Or you can just drive around if you like to.
+
+![City overview banner](Images/Vehicles.png)
 
 ## Download
 
