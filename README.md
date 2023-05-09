@@ -1,4 +1,4 @@
-![Game banner](Images\Banner.png)
+![Game banner](Images/Banner.png)
 
 # UE5 - Traffic Game
 
@@ -47,7 +47,7 @@ I provide both a Development and a Shipping version, the Development is useful i
 
 All assets used are free to use under the Creative Commons CC0 license.
 
-You can find a summary of the used in the [ASSETS](ASSETS.MD) file.
+You can find a summary of the used in the [ASSETS](ASSETS.md) file.
 
 ## Engine Version
 
@@ -55,7 +55,7 @@ I did this project on Unreal Engine 5.1.x, standard version installed from the E
 
 I will consider updating it to new Unreal Versions when they come out, keeping a branch for every old version so it's always acccessible.
 
-To see the current engine version check the [uproject file](TrafficGame\TrafficGame.uproject).
+To see the current engine version check the [uproject file](TrafficGame/TrafficGame.uproject).
 
 ## Bugs and problems
 
