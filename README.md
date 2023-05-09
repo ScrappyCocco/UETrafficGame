@@ -51,7 +51,7 @@ You can find a summary of the used in the [ASSETS](ASSETS.MD) file.
 
 ## Engine Version
 
-I did this project on Unreal Engine 5.1.x.
+I did this project on Unreal Engine 5.1.x, standard version installed from the Epic Launcher.
 
 I will consider updating it to new Unreal Versions when they come out, keeping a branch for every old version so it's always acccessible.
 
