@@ -17,7 +17,7 @@ A small playground to play with UE5 and its vehicles 🚗
 
 This is a small project used as example about how to use Unreal Engine vehicles, and as playground to try Unreal Engine 5 with Nanite, Lumen, and the new Chaos physics and its tools.
 
-It's inspired by Epic Vehicle Template of UE5, which is BP only and which is still included and untouched in this project. All right reserved to Epic for that Starting Content.
+It is inspired by Epic BP VehicleTemplate of UE5, you can check that out by creating a new Unreal Project. All right reserved to Epic for that Starting Content.
 
 You can use it as you wish: play it, edit it, add or edit levels or vehicles, or just take something to use on your own project.
 
