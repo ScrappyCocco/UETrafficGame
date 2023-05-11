@@ -125,7 +125,7 @@ private:
 	void EndBackgroundReplay();
 	void TimerEndAndRestartBackgroundReplay();
 
-	TObjectPtr<FTrafficGameLevelRow> LoadedLevelRow = nullptr;
+	TUniquePtr<FTrafficGameLevelRow> LoadedLevelRow = nullptr;
 
 	TArray<FTrafficGameLevelSettingsRow> LevelSettings;
 
