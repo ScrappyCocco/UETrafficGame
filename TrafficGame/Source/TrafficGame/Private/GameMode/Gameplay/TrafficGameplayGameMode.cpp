@@ -38,9 +38,11 @@ void ATrafficGameplayGameMode::LoadLevelSettings()
 		// Get the Level Settings
 		if (LevelsDataTable)
 		{
-			LoadedLevelRow = LevelsDataTable->FindRow<FTrafficGameLevelRow>(FName(*MapName), LevelsDataTable->GetName());
-			if (LoadedLevelRow)
+			const FTrafficGameLevelRow* FoundLevelRow = LevelsDataTable->FindRow<FTrafficGameLevelRow>(FName(*MapName), LevelsDataTable->GetName());
+			if (FoundLevelRow)
 			{
+				LoadedLevelRow = MakeUnique<FTrafficGameLevelRow>(MoveTempIfPossible(*FoundLevelRow));
+
 				// Find Level Overview Camera
 				LocateOverviewCamera();
 
