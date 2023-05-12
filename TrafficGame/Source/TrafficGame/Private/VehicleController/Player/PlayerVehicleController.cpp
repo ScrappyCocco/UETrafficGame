@@ -4,8 +4,14 @@
 #include "ChaosWheeledVehicleMovementComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Cheats/TrafficCheatManager.h"
 #include "Kismet/GameplayStatics.h"
 #include "Pawn/BaseVehiclePawn.h"
+
+APlayerVehicleController::APlayerVehicleController()
+{
+	CheatClass = UTrafficCheatManager::StaticClass();
+}
 
 void APlayerVehicleController::BeginPlay()
 {
