@@ -77,8 +77,10 @@ protected:
 
 private:
 
+	UPROPERTY()
 	TObjectPtr<ABaseVehiclePawn> VehiclePawn = nullptr;
 
+	UPROPERTY()
 	TObjectPtr<UChaosWheeledVehicleMovementComponent> VehicleMovementComponent = nullptr;
 };
 

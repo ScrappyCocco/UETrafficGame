@@ -15,6 +15,7 @@ struct FRoundVehicle
 {
 	GENERATED_BODY()
 
+	UPROPERTY()
 	TObjectPtr<AReplayVehiclePawn> VehiclePawn = nullptr;
 
 	FTransform IdleSpawnLocation;
@@ -23,6 +24,7 @@ struct FRoundVehicle
 
 	FString FinishTriggerTag;
 
+	UPROPERTY()
 	TObjectPtr<AActor> FinishVolume = nullptr;
 
 };
