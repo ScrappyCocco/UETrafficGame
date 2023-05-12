@@ -77,7 +77,7 @@ void ATrafficGameplayGameMode::LocateOverviewCamera()
 {
 	if (const UWorld* World = GetWorld())
 	{
-		if (LoadedLevelRow)
+		if (LoadedLevelRow.IsValid())
 		{
 			TArray<AActor*> FoundCameras;
 			const FString SearchCameraTag = LoadedLevelRow->LevelOverviewCameraTag;
@@ -154,7 +154,7 @@ AActor* ATrafficGameplayGameMode::LocateSpawnPointActor() const
 	if (const UWorld* World = GetWorld())
 	{
 		TArray<AActor*> Actors;
-		const FString SpawnPointTag = LoadedLevelRow ? LoadedLevelRow->IdleSpawnPointTag : FString();
+		const FString SpawnPointTag = LoadedLevelRow.IsValid() ? LoadedLevelRow->IdleSpawnPointTag : FString();
 		UGameplayStatics::GetAllActorsWithTag(World, FName(*SpawnPointTag), Actors);
 
 		if (Actors.Num() > 1)
@@ -294,7 +294,7 @@ void ATrafficGameplayGameMode::PreGameplay()
 
 	EnableOverviewCamera();
 
-	if (LoadedLevelRow)
+	if (LoadedLevelRow.IsValid())
 	{
 		ShowGameplayStartWidget(LoadedLevelRow->GameplayStartWidget);
 	}
@@ -304,7 +304,7 @@ void ATrafficGameplayGameMode::PostGameplay()
 {
 	EnableOverviewCamera();
 
-	if (LoadedLevelRow)
+	if (LoadedLevelRow.IsValid())
 	{
 		ShowGameplayEndWidgetWidget(LoadedLevelRow->GameplayEndWidget);
 	}
@@ -314,7 +314,7 @@ void ATrafficGameplayGameMode::PostEndRound()
 {
 	EnableOverviewCamera();
 
-	if (LoadedLevelRow)
+	if (LoadedLevelRow.IsValid())
 	{
 		ShowNextRoundWidget(LoadedLevelRow->NextRoundWidget);
 	}
@@ -347,17 +347,23 @@ void ATrafficGameplayGameMode::EnableOverviewCamera() const
 		}
 	}
 
-	if (LoadedLevelRow->bLevelUseSequencerAsPreview && LevelSequence.IsValid())
+	if (LoadedLevelRow.IsValid())
 	{
-		LevelSequence->Play();
+		if (LoadedLevelRow->bLevelUseSequencerAsPreview && LevelSequence.IsValid())
+		{
+			LevelSequence->Play();
+		}
 	}
 }
 
 void ATrafficGameplayGameMode::DisableOverviewCamera() const
 {
-	if (LoadedLevelRow->bLevelUseSequencerAsPreview && LevelSequence.IsValid())
+	if (LoadedLevelRow.IsValid())
 	{
-		LevelSequence->Stop();
+		if (LoadedLevelRow->bLevelUseSequencerAsPreview && LevelSequence.IsValid())
+		{
+			LevelSequence->Stop();
+		}
 	}
 
 	if (OverviewCamera.IsValid())
@@ -572,7 +578,7 @@ void ATrafficGameplayGameMode::EndRound(const bool bGoToNextRound)
 	}
 
 	// Played at least one round and replay enabled
-	if (CurrentRound > 0 && LoadedLevelRow && LoadedLevelRow->bShouldPlayBackgroundReplay)
+	if (CurrentRound > 0 && LoadedLevelRow.IsValid() && LoadedLevelRow->bShouldPlayBackgroundReplay)
 	{
 		StartBackgroundReplay();
 	}

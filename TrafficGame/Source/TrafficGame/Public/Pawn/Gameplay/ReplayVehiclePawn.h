@@ -31,6 +31,7 @@ public:
 
 protected:
 
+	UPROPERTY()
 	TObjectPtr<UVehicleBaseReplayComponent> ReplayComponent;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Vehicle Components")
