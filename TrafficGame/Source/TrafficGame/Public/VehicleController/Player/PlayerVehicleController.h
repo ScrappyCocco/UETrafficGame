@@ -22,6 +22,8 @@ class TRAFFICGAME_API APlayerVehicleController final : public APlayerController
 
 public:
 
+	APlayerVehicleController();
+
 	virtual void BeginPlay() override;
 
 	virtual void SetupInputComponent() override;

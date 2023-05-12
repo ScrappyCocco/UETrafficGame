@@ -38,6 +38,9 @@ class TRAFFICGAME_API ATrafficGameplayGameMode final : public ATrafficGameGameMo
 {
 	GENERATED_BODY()
 
+	// The Cheat Manager is friend with the Game Mode to change stuff
+	friend class UTrafficCheatManager;
+
 public:
 
 	virtual void BeginPlay() override;
@@ -93,7 +96,10 @@ private:
 	void LoadLevelSettings();
 	void LocateOverviewCamera();
 	AActor* LocateSpawnPointActor() const;
+
 	void SpawnPawns();
+	FVehiclePawnRow* FindVehicle(const FString& VehicleID) const;
+	AReplayVehiclePawn* SpawnVehicle(const FVehiclePawnRow* VehicleRow, const FTransform& SpawnTransform) const;
 	FTransform GetVehicleGameplaySpawnLocation(const FTrafficGameLevelSettingsRow& RoundRow) const;
 	AActor* GetVehicleGameplayFinishActor(const FTrafficGameLevelSettingsRow& RoundRow) const;
 

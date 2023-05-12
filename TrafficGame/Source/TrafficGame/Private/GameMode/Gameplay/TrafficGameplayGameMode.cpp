@@ -184,49 +184,64 @@ void ATrafficGameplayGameMode::SpawnPawns()
 		for (const FTrafficGameLevelSettingsRow LevelRound : LevelSettings)
 		{
 			const FString VehicleID = LevelRound.VehicleID;
-			if (VehiclePawnsDataTable)
+			if (const FVehiclePawnRow* VehicleRow = FindVehicle(VehicleID))
 			{
-				if (const FVehiclePawnRow* VehicleRow = VehiclePawnsDataTable->FindRow<FVehiclePawnRow>(FName(*VehicleID), VehiclePawnsDataTable->GetName()))
+				FTransform SpawnTransform;
+				SpawnTransform.SetLocation(SpawnPosition);
+
+				UE_LOG(LogTrafficGameGameMode, Display, TEXT("IdleSpawnLocation %f %f %f"), SpawnPosition.X, SpawnPosition.Y, SpawnPosition.Z);
+				AReplayVehiclePawn* SpawnedVehicle = SpawnVehicle(VehicleRow, SpawnTransform);
+
+				FRoundVehicle RoundVehicleStruct;
+				RoundVehicleStruct.VehiclePawn = SpawnedVehicle;
+				RoundVehicleStruct.IdleSpawnLocation = SpawnTransform;
+				RoundVehicleStruct.StartSpawnLocation = GetVehicleGameplaySpawnLocation(LevelRound);
+				RoundVehicleStruct.FinishTriggerTag = LevelRound.DestinationPointActorTag;
+				RoundVehicleStruct.FinishVolume = GetVehicleGameplayFinishActor(LevelRound);
+				Vehicles.Add(RoundVehicleStruct);
+
+				// This switch between +/- to go left/right from the given center
+				if (bSpawnFlipFlop)
 				{
-					FRoundVehicle RoundVehicleStruct;
-
-					FTransform SpawnTransform;
-					SpawnTransform.SetLocation(SpawnPosition);
-
-					FActorSpawnParameters SpawnParameters;
-					SpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
-
-					UE_LOG(LogTrafficGameGameMode, Display, TEXT("IdleSpawnLocation %f %f %f"), SpawnPosition.X, SpawnPosition.Y, SpawnPosition.Z);
-					AReplayVehiclePawn* SpawnedVehicle = World->SpawnActor<AReplayVehiclePawn>(VehicleRow->VehiclePawn, SpawnTransform, SpawnParameters);
-
-					RoundVehicleStruct.VehiclePawn = SpawnedVehicle;
-					RoundVehicleStruct.IdleSpawnLocation = SpawnTransform;
-					RoundVehicleStruct.StartSpawnLocation = GetVehicleGameplaySpawnLocation(LevelRound);
-					RoundVehicleStruct.FinishTriggerTag = LevelRound.DestinationPointActorTag;
-					RoundVehicleStruct.FinishVolume = GetVehicleGameplayFinishActor(LevelRound);
-					Vehicles.Add(RoundVehicleStruct);
-
-					// This switch between +/- to go left/right from the given center
-					if (bSpawnFlipFlop)
-					{
-						SpawnPosition += FVector(0, 500, 0);
-					}
-					SpawnPosition.Set(SpawnPosition.X, SpawnPosition.Y * -1, SpawnPosition.Z);
-					bSpawnFlipFlop = !bSpawnFlipFlop;
-
-					UE_LOG(LogTrafficGameGameMode, Display, TEXT("Correctly Spawned VehicleID: %s"), *VehicleID);
+					SpawnPosition += FVector(0, 500, 0);
 				}
-				else
-				{
-					UE_LOG(LogTrafficGameGameMode, Error, TEXT("Unable to find FVehiclePawnRow for VehicleID: %s"), *VehicleID);
-				}
+				SpawnPosition.Set(SpawnPosition.X, SpawnPosition.Y * -1, SpawnPosition.Z);
+				bSpawnFlipFlop = !bSpawnFlipFlop;
+
+				UE_LOG(LogTrafficGameGameMode, Display, TEXT("Correctly Spawned VehicleID: %s"), *VehicleID);
 			}
 			else
 			{
-				UE_LOG(LogTrafficGameGameMode, Error, TEXT("VehiclePawnsDataTable is not set!"));
+				UE_LOG(LogTrafficGameGameMode, Error, TEXT("Unable to find FVehiclePawnRow for VehicleID: %s"), *VehicleID);
 			}
 		}
 	}
+}
+
+FVehiclePawnRow* ATrafficGameplayGameMode::FindVehicle(const FString& VehicleID) const
+{
+	if (VehiclePawnsDataTable)
+	{
+		return VehiclePawnsDataTable->FindRow<FVehiclePawnRow>(FName(*VehicleID), VehiclePawnsDataTable->GetName());
+	}
+
+	UE_LOG(LogTrafficGameGameMode, Error, TEXT("VehiclePawnsDataTable is not set!"));
+	return nullptr;
+}
+
+AReplayVehiclePawn* ATrafficGameplayGameMode::SpawnVehicle(const FVehiclePawnRow* VehicleRow, const FTransform& SpawnTransform) const
+{
+	if (UWorld* World = GetWorld())
+	{
+		FActorSpawnParameters SpawnParameters;
+		SpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+		AReplayVehiclePawn* SpawnedVehicle = World->SpawnActor<AReplayVehiclePawn>(VehicleRow->VehiclePawn, SpawnTransform, SpawnParameters);
+
+		return SpawnedVehicle;
+	}
+
+	return nullptr;
 }
 
 FTransform ATrafficGameplayGameMode::GetVehicleGameplaySpawnLocation(const FTrafficGameLevelSettingsRow& RoundRow) const
