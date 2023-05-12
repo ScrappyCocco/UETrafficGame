@@ -23,11 +23,11 @@ You can use it as you wish: play it, edit it, add or edit levels or vehicles, or
 
 ### Requirements
 
-Any PC that can run Unreal Engine 5 can run this project and this game, but it could be a little laggy, it's not made to be super optimized, specially regarding the rendering in the big map. Static Lightning is disabeld to save (baking) time and space.
+Any PC that can run Unreal Engine 5 can run this project and this game, but it could be a little laggy, it's not made to be super optimized, specially regarding the rendering in the big map. Static Lightning is disabled to save (baking) time and space.
 
 If you want to edit the source code and/or build the project obviously you will need the standard Unreal Engine C++ configuration with either Visual Studio or CLang.
 
-I have not uploaded Editor Binaries yet because I don't think they are needed, if you absolutelly want just the Editor to play with it and BP feel free to ask for them.
+I have not uploaded Editor Binaries yet because I don't think they are needed, if you absolutely want just the Editor to play with it and BP feel free to ask for them.
 
 ## Inspiration
 
@@ -55,13 +55,15 @@ You can find a summary of the used in the [ASSETS](ASSETS.md) file.
 
 I did this project on Unreal Engine 5.1.x, standard version installed from the Epic Launcher.
 
-I will consider updating it to new Unreal Versions when they come out, keeping a branch for every old version so it's always acccessible.
+I will consider updating it to new Unreal Versions when they come out, keeping a branch for every old version so it's always accessible.
 
 To see the current engine version check the [uproject file](TrafficGame/TrafficGame.uproject).
 
 ## Bugs and problems
 
 The game is not perfect, and it probably still have many problems related to vehicle physics and its replay. If you find a game-breaking bug or want to discuss something feel free to open an Issue or a Discussion.
+
+Remember that the ChaosVehiclesPlugin is still experimental for now, so it could be a little broken.
 
 ## How does it work / How can I use it / How can I edit it
 
