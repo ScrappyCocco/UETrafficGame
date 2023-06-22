@@ -17,7 +17,7 @@ class TRAFFICGAME_API AReplayVehiclePawn final : public ABaseVehiclePawn
 
 public:
 
-	AReplayVehiclePawn(const FObjectInitializer & ObjectInitializer);
+	AReplayVehiclePawn(const FObjectInitializer& ObjectInitializer);
 
 	// Called when the Player is using/finish using this vehicle
 	void EnablePlayerVehicleComponents() const;
