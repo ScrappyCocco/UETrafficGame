@@ -8,8 +8,8 @@ public class TrafficGameTarget : TargetRules
 	public TrafficGameTarget( TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
-		DefaultBuildSettings = BuildSettingsVersion.V2;
-		IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
+        DefaultBuildSettings = BuildSettingsVersion.Latest;
+        IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
 		ExtraModuleNames.Add("TrafficGame");
 	}
 }
