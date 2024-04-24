@@ -19,7 +19,7 @@ public:
 
 	// Set the CurrentRound in the GameMode, allowing you to skip directly to a future or previous round
 	// This can break the game if used during a round, and UI is not updated
-	// If you ship from round 1 to round 10, middle rounds will not have the replay of course
+	// If you skip from round 1 to round 10, middle rounds will not have the replay of course
 	// If you go from round 10 to round 1 you will overwrite replays
 	// Round goes from 0 to N-1
 	UFUNCTION(exec)
